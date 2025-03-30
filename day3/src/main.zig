@@ -93,7 +93,7 @@ const Parser = struct {
     }
 
     fn parse_mul(self: *Parser) !i32 {
-        try self.char_m();
+        try self.char('m');
         try self.char('u');
         try self.char('l');
         try self.char('(');
@@ -107,18 +107,6 @@ const Parser = struct {
         } else {
             return 0;
         }
-    }
-
-    fn char_m(self: *Parser) !void {
-        const byte = self.next();
-        if (byte) |b| {
-            if (b == 'm') {
-                return;
-            } else {
-                return ParserError.WrongChar;
-            }
-        }
-        return ParserError.EndOfBuffer;
     }
 
     fn char(self: *Parser, comptime c: u8) !void {
